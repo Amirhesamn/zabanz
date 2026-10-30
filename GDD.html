@@ -1,0 +1,523 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>زبانز — سند طراحی محصول</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f7f5f0; --surface:#ffffff; --surface-2:#f0ede6; --text:#1d1b18; --muted:#6b665d;
+  --line:#e3ded3; --brand:#0f766e; --brand-soft:#d5efe9; --accent:#e0702a; --accent-soft:#fbe6d7;
+  --ok:#15803d; --bad:#b91c1c; --shadow:0 1px 2px rgba(0,0,0,.04),0 8px 24px rgba(0,0,0,.05);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#121412; --surface:#1b1e1c; --surface-2:#232725; --text:#ece9e2; --muted:#a19c92;
+    --line:#2f3431; --brand:#2dd4bf; --brand-soft:#123b36; --accent:#f59e5b; --accent-soft:#3a2516;
+    --ok:#4ade80; --bad:#f87171; --shadow:none;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#121412; --surface:#1b1e1c; --surface-2:#232725; --text:#ece9e2; --muted:#a19c92;
+  --line:#2f3431; --brand:#2dd4bf; --brand-soft:#123b36; --accent:#f59e5b; --accent-soft:#3a2516;
+  --ok:#4ade80; --bad:#f87171; --shadow:none;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font-family:"Vazirmatn",Tahoma,sans-serif;
+  font-size:16.5px;line-height:1.95;-webkit-font-smoothing:antialiased}
+a{color:var(--brand)}
+.wrap{max-width:1180px;margin:0 auto;padding:0 16px;display:grid;grid-template-columns:240px 1fr;gap:40px}
+@media (max-width:900px){.wrap{grid-template-columns:1fr}.toc{display:none}}
+
+/* hero */
+.hero{background:var(--surface);border-bottom:1px solid var(--line);margin-bottom:40px}
+.hero-in{max-width:1180px;margin:0 auto;padding:56px 16px 44px;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center}
+@media (max-width:760px){.hero-in{grid-template-columns:1fr}.phone{display:none}}
+.kicker{display:inline-block;font-size:13px;font-weight:700;color:var(--brand);background:var(--brand-soft);
+  padding:4px 12px;border-radius:99px;margin-bottom:14px}
+h1{font-size:clamp(34px,5vw,56px);font-weight:900;line-height:1.25;margin:0 0 12px;letter-spacing:-.5px}
+h1 em{font-style:normal;color:var(--accent)}
+.lead{font-size:19px;color:var(--muted);max-width:620px;margin:0}
+.meta{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:22px;font-size:14px;color:var(--muted)}
+.meta b{color:var(--text);font-weight:600}
+
+/* phone mockup */
+.phone{width:250px;border:10px solid var(--text);border-radius:36px;background:var(--bg);padding:18px 14px;box-shadow:var(--shadow)}
+.ph-top{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-bottom:10px}
+.ph-bar{height:6px;background:var(--surface-2);border-radius:9px;overflow:hidden;margin-bottom:16px}
+.ph-bar i{display:block;height:100%;width:60%;background:var(--brand)}
+.ph-q{direction:ltr;text-align:left;font-size:14px;font-weight:500;line-height:1.6;margin-bottom:12px}
+.ph-o{direction:ltr;text-align:left;font-size:13px;background:var(--surface);border:1.5px solid var(--line);border-radius:12px;padding:7px 12px;margin-bottom:7px}
+.ph-o.ok{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 12%,var(--surface))}
+.ph-o.bad{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 10%,var(--surface))}
+.ph-ex{font-size:12px;background:var(--brand-soft);border-radius:10px;padding:8px 10px;margin-top:10px;line-height:1.8}
+
+/* toc */
+.toc{position:sticky;top:24px;align-self:start;font-size:14px;max-height:calc(100vh - 48px);overflow:auto}
+.toc b{display:block;font-size:12px;color:var(--muted);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);text-decoration:none;padding:5px 12px;border-right:2px solid var(--line)}
+.toc a:hover{color:var(--brand);border-color:var(--brand)}
+
+/* content */
+main{min-width:0;padding-bottom:80px}
+section{margin-bottom:64px;scroll-margin-top:20px}
+h2{font-size:28px;font-weight:800;margin:0 0 6px;display:flex;align-items:baseline;gap:12px}
+h2 .n{font-size:15px;font-weight:700;color:var(--accent);font-feature-settings:"tnum"}
+h3{font-size:19px;font-weight:700;margin:28px 0 8px}
+.sub{color:var(--muted);margin:0 0 22px}
+p{margin:0 0 14px}
+ul,ol{padding-right:22px;margin:0 0 14px}
+li{margin-bottom:4px}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:20px 22px;box-shadow:var(--shadow)}
+.card h4{margin:0 0 6px;font-size:17px;font-weight:700}
+.card p,.card li{font-size:15px;color:var(--muted)}
+.card p:last-child,.card ul:last-child{margin-bottom:0}
+.tag{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:99px;background:var(--surface-2);color:var(--muted);margin:0 0 8px 4px}
+.tag.mvp{background:var(--brand-soft);color:var(--brand)}
+.tag.v2{background:var(--accent-soft);color:var(--accent)}
+.note{border-right:4px solid var(--accent);background:var(--accent-soft);padding:14px 18px;border-radius:10px;margin:18px 0;font-size:15.5px}
+.note.brand{border-color:var(--brand);background:var(--brand-soft)}
+table{width:100%;border-collapse:collapse;font-size:15px;background:var(--surface);border-radius:14px;overflow:hidden;border:1px solid var(--line)}
+th,td{text-align:right;padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:var(--surface-2);font-weight:700;font-size:14px}
+tr:last-child td{border-bottom:0}
+.tbl{overflow-x:auto;margin-bottom:16px}
+code,pre{font-family:"JetBrains Mono",monospace;font-size:13.5px}
+code{background:var(--surface-2);padding:1px 6px;border-radius:5px;direction:ltr;unicode-bidi:embed}
+pre{direction:ltr;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;overflow-x:auto;line-height:1.6;margin:0 0 16px}
+
+/* leitner boxes */
+.boxes{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin:18px 0}
+@media (max-width:640px){.boxes{grid-template-columns:repeat(3,1fr)}}
+.bx{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 8px;text-align:center}
+.bx b{display:block;font-size:24px;font-weight:900;color:var(--brand)}
+.bx span{font-size:13px;color:var(--muted)}
+.bx.done{background:var(--brand);border-color:var(--brand)}
+.bx.done b,.bx.done span{color:var(--surface)}
+
+/* architecture */
+.arch{display:grid;grid-template-columns:1fr 60px 1fr 60px 1fr;align-items:center;gap:0;margin:20px 0}
+@media (max-width:760px){.arch{grid-template-columns:1fr}.arrow{transform:rotate(90deg);height:40px}}
+.arrow{text-align:center;color:var(--muted);font-size:22px}
+.layer{background:var(--surface);border:1.5px solid var(--line);border-radius:16px;padding:16px}
+.layer h5{margin:0 0 8px;font-size:15px;color:var(--brand)}
+.layer div{font-size:13.5px;color:var(--muted);line-height:1.9}
+
+/* roadmap */
+.road{position:relative;padding-right:28px}
+.road::before{content:"";position:absolute;right:8px;top:6px;bottom:6px;width:2px;background:var(--line)}
+.step{position:relative;margin-bottom:22px}
+.step::before{content:"";position:absolute;right:-26px;top:9px;width:14px;height:14px;border-radius:50%;background:var(--surface);border:3px solid var(--brand)}
+.step h4{margin:0;font-size:17px}
+.step small{color:var(--accent);font-weight:700}
+.step p{color:var(--muted);font-size:15px;margin:4px 0 0}
+
+.theme-btn{position:fixed;left:16px;bottom:16px;border:1px solid var(--line);background:var(--surface);color:var(--text);
+  font-family:inherit;font-size:13px;padding:8px 14px;border-radius:99px;cursor:pointer;box-shadow:var(--shadow)}
+footer{text-align:center;color:var(--muted);font-size:13px;padding:24px 16px 40px;border-top:1px solid var(--line)}
+@media print{.toc,.theme-btn,.phone{display:none}.wrap{grid-template-columns:1fr}section{break-inside:avoid-page}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-in">
+    <div>
+      <span class="kicker">GDD / PRD · نسخه ۱.۰</span>
+      <h1>زبانز — روزی ده تست،<br><em>هر روز یک قدم</em></h1>
+      <p class="lead">اپلیکیشن رایگان تمرین زبان انگلیسی با هزاران سؤال چهارگزینه‌ای گرامر، لغت و ریدینگ؛ با جعبهٔ لایتنر پنج‌خانه‌ای برای حفظ لغات، دفتر اشتباهات هوشمند و آمار دقیق پیشرفت.</p>
+      <div class="meta">
+        <span>پلتفرم: <b>Android ← iOS</b></span>
+        <span>فناوری: <b>React Native (Expo)</b></span>
+        <span>مدل درآمد: <b>Freemium</b></span>
+        <span>تاریخ: <b>آبان ۱۴۰۵</b></span>
+      </div>
+    </div>
+    <div class="phone" aria-hidden="true">
+      <div class="ph-top"><span>گرامر · B1</span><span>۶ / ۱۰</span></div>
+      <div class="ph-bar"><i></i></div>
+      <div class="ph-q">If I ____ more time, I would learn Japanese.</div>
+      <div class="ph-o">have</div>
+      <div class="ph-o bad">will have</div>
+      <div class="ph-o ok">had</div>
+      <div class="ph-o">would have</div>
+      <div class="ph-ex">💡 شرطی نوع دوم: if + گذشتهٔ ساده، would + فعل ساده</div>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+<nav class="toc">
+  <b>فهرست</b>
+  <a href="#vision">۱. چشم‌انداز</a>
+  <a href="#audience">۲. مخاطب</a>
+  <a href="#loop">۳. حلقهٔ اصلی</a>
+  <a href="#features">۴. فیچرها</a>
+  <a href="#leitner">۵. لایتنر / G5</a>
+  <a href="#game">۶. گیمیفیکیشن</a>
+  <a href="#content">۷. بانک سؤال</a>
+  <a href="#money">۸. مدل درآمد</a>
+  <a href="#tech">۹. فناوری</a>
+  <a href="#data">۱۰. مدل داده</a>
+  <a href="#screens">۱۱. صفحات</a>
+  <a href="#kpi">۱۲. معیارها</a>
+  <a href="#roadmap">۱۳. نقشهٔ راه</a>
+  <a href="#risks">۱۴. ریسک‌ها</a>
+  <a href="#next">۱۵. قدم بعدی</a>
+</nav>
+
+<main>
+
+<section id="vision">
+  <h2><span class="n">۰۱</span>چشم‌انداز و ارزش پیشنهادی</h2>
+  <p class="sub">چرا این اپ باید وجود داشته باشد و چه چیزی آن را متمایز می‌کند.</p>
+  <p>بیشتر زبان‌آموزان ایرانی بالاخره با یک آزمون چهارگزینه‌ای روبه‌رو می‌شوند: کنکور، MSRT، EPT، تولیمو، بخش‌هایی از تافل و آیلتس، یا آزمون‌های تعیین سطح آموزشگاه‌ها. اپ‌های بزرگ (Duolingo و مشابه) برای «شروع یادگیری» ساخته شده‌اند، نه برای «تمرین هدفمند تست‌زنی». کتاب‌های تست هم توضیح ندارند، آمار نمی‌دهند و اشتباهات را دوباره جلوی چشم نمی‌آورند.</p>
+  <div class="grid">
+    <div class="card"><h4>🎯 تمرین هدفمند</h4><p>هر سؤال برچسب مهارت، مبحث و سطح CEFR دارد؛ اپ می‌داند کاربر دقیقاً کجا ضعیف است.</p></div>
+    <div class="card"><h4>💡 توضیح برای هر پاسخ</h4><p>هر سؤال یک توضیح کوتاه فارسی دارد. تست بدون توضیح فقط حدس‌زدن است، نه یادگیری.</p></div>
+    <div class="card"><h4>🔁 هیچ اشتباهی گم نمی‌شود</h4><p>سؤال‌های غلط و نشان‌شده به‌طور خودکار وارد چرخهٔ مرور فاصله‌دار می‌شوند.</p></div>
+    <div class="card"><h4>📶 آفلاین‌محور</h4><p>بسته‌های سؤال دانلود می‌شوند؛ با اینترنت ضعیف و قطعی هم اپ کار می‌کند.</p></div>
+  </div>
+  <div class="note brand"><b>اصل طلایی محصول:</b> هستهٔ یادگیری (تمرین، توضیح، بوکمارک، لایتنر پایه) برای همیشه رایگان می‌ماند. پول از «راحتی، عمق و سرعت» درمی‌آید، نه از قفل‌کردن آموزش.</div>
+</section>
+
+<section id="audience">
+  <h2><span class="n">۰۲</span>مخاطب و پرسونا</h2>
+  <p class="sub">بازار اول: فارسی‌زبانان داخل و خارج ایران. بعدها: بومی‌سازی برای ترکی، عربی و ...</p>
+  <div class="grid">
+    <div class="card"><span class="tag">۱۶ تا ۱۹ سال</span><h4>سارا — کنکوری</h4><p>هدف: درصد زبان کنکور. ۱۵ دقیقه بین درس‌های دیگر وقت دارد. نیاز: تست سریع، آمار، رقابت با دوستان.</p></div>
+    <div class="card"><span class="tag">۲۴ تا ۳۲ سال</span><h4>علی — دانشجوی ارشد/دکتری</h4><p>هدف: نمرهٔ MSRT/EPT یا آیلتس برای مهاجرت تحصیلی. نیاز: آزمون شبیه‌سازی‌شده، ریدینگ زمان‌دار، لغات آکادمیک.</p></div>
+    <div class="card"><span class="tag">بزرگسال</span><h4>مریم — زبان‌آموز آموزشگاه</h4><p>هدف: پیشرفت پیوسته. نیاز: حفظ لغات روزانه، استریک، تمرین هم‌سطح کلاس.</p></div>
+  </div>
+</section>
+
+<section id="loop">
+  <h2><span class="n">۰۳</span>حلقهٔ اصلی تجربه (Core Loop)</h2>
+  <p class="sub">هر جلسه باید کمتر از ۵ دقیقه طول بکشد و حس پیشرفت بدهد.</p>
+  <div class="arch" style="grid-template-columns:1fr 40px 1fr 40px 1fr 40px 1fr">
+    <div class="layer"><h5>۱. ورود</h5><div>اعلان یادآور یا استریک<br>«۱۲ کارت لایتنر منتظر توست»</div></div>
+    <div class="arrow">←</div>
+    <div class="layer"><h5>۲. تمرین</h5><div>درس روزانه: ۱۰ سؤال ترکیبی متناسب با سطح و نقاط ضعف</div></div>
+    <div class="arrow">←</div>
+    <div class="layer"><h5>۳. بازخورد</h5><div>پاسخ درست + توضیح فوری<br>غلط‌ها ← دفتر اشتباهات</div></div>
+    <div class="arrow">←</div>
+    <div class="layer"><h5>۴. پاداش</h5><div>XP، استریک، پیشرفت سطح، جایگاه در لیگ</div></div>
+  </div>
+  <p>حلقهٔ بلندمدت: <b>تعیین سطح ← مسیر یادگیری ← آزمون‌های میان‌دوره ← ارتقای سطح CEFR ← شبیه‌ساز آزمون هدف</b>.</p>
+</section>
+
+<section id="features">
+  <h2><span class="n">۰۴</span>فیچرها و اولویت‌بندی</h2>
+  <p class="sub"><span class="tag mvp">MVP</span> برای عرضهٔ اول ضروری · <span class="tag">v1.1</span> سه ماه بعد · <span class="tag v2">v2</span> پس از تأیید بازار</p>
+
+  <h3>تمرین و آزمون</h3>
+  <div class="grid">
+    <div class="card"><span class="tag mvp">MVP</span><h4>آزمون تعیین سطح</h4><p>۲۰ سؤال تطبیقی (سخت‌تر/آسان‌تر بر اساس پاسخ قبلی). خروجی: سطح CEFR و نقطهٔ شروع. قابل رد شدن.</p></div>
+    <div class="card"><span class="tag mvp">MVP</span><h4>درس روزانه</h4><p>۱۰ سؤال: ۶۰٪ سطح فعلی، ۲۰٪ مباحث ضعیف، ۲۰٪ مرور غلط‌های قبلی.</p></div>
+    <div class="card"><span class="tag mvp">MVP</span><h4>تمرین آزاد</h4><p>انتخاب مهارت (گرامر/لغت/ریدینگ) ← مبحث ← سطح ← تعداد. بدون محدودیت.</p></div>
+    <div class="card"><span class="tag mvp">MVP</span><h4>ریدینگ</h4><p>متن + ۳ تا ۶ سؤال. متن قابل اسکرول، سؤال‌ها در پنل پایینی. لمس هر لغت ← معنی + افزودن به لایتنر.</p></div>
+    <div class="card"><span class="tag">v1.1</span><h4>آزمون زمان‌دار</h4><p>شبیه‌ساز با زمان، نمرهٔ منفی (مثل کنکور) و کارنامهٔ پایانی.</p></div>
+    <div class="card"><span class="tag v2">v2</span><h4>شبیه‌ساز آزمون‌های رسمی</h4><p>ساختار دقیق MSRT، EPT، کنکور، بخش Reading آیلتس. پیش‌بینی نمره.</p></div>
+  </div>
+
+  <h3>بوکمارک و دفتر اشتباهات</h3>
+  <ul>
+    <li><b>بوکمارک دستی</b> <span class="tag mvp">MVP</span>: یک لمس روی هر سؤال؛ قابل فیلتر بر اساس مهارت و مبحث؛ امکان یادداشت شخصی <span class="tag">v1.1</span>.</li>
+    <li><b>دفتر اشتباهات خودکار</b> <span class="tag mvp">MVP</span>: هر سؤال غلط به‌طور خودکار اضافه می‌شود و بعد از دو بار پاسخ درست در روزهای متفاوت خارج می‌شود.</li>
+    <li><b>مرور هوشمند</b>: سؤال‌های بوکمارک و اشتباه هم از همان موتور مرور فاصله‌دار لایتنر استفاده می‌کنند؛ یک سیستم، دو کاربرد.</li>
+  </ul>
+
+  <h3>آمار و گزارش</h3>
+  <div class="tbl"><table>
+    <tr><th>گزارش</th><th>محتوا</th><th>نسخه</th></tr>
+    <tr><td>خلاصهٔ امروز/هفته</td><td>تعداد سؤال، درصد درست، زمان تمرین، استریک</td><td><span class="tag mvp">MVP</span></td></tr>
+    <tr><td>دقت به تفکیک مهارت</td><td>گرامر / لغت / ریدینگ با نمودار میله‌ای</td><td><span class="tag mvp">MVP</span></td></tr>
+    <tr><td>نقشهٔ ضعف</td><td>مباحثی مثل «حروف اضافه» یا «شرطی‌ها» با دقت زیر ۶۰٪ + دکمهٔ «همین را تمرین کن»</td><td><span class="tag">v1.1</span></td></tr>
+    <tr><td>روند پیشرفت</td><td>نمودار خطی دقت و سطح تخمینی در ۳۰ روز</td><td><span class="tag">v1.1</span></td></tr>
+    <tr><td>تاریخچهٔ پاسخ‌ها</td><td>دیدن تک‌تک سؤال‌های گذشته با پاسخ کاربر</td><td><span class="tag">v1.1</span></td></tr>
+    <tr><td>پیش‌بینی نمرهٔ آزمون</td><td>بر اساس دقت وزن‌دار در مباحث آزمون هدف</td><td><span class="tag v2">v2</span></td></tr>
+  </table></div>
+
+  <h3>سایر</h3>
+  <ul>
+    <li><b>گزارش خطای سؤال</b> <span class="tag mvp">MVP</span>: «این سؤال ایراد دارد» — حیاتی برای کیفیت بانک سؤال.</li>
+    <li><b>حالت مهمان</b> <span class="tag mvp">MVP</span>: شروع بدون ثبت‌نام؛ ثبت‌نام (شماره موبایل یا گوگل) فقط برای همگام‌سازی.</li>
+    <li><b>تلفظ لغات</b> <span class="tag">v1.1</span>: صدای TTS از پیش تولیدشده برای هر لغت.</li>
+    <li><b>توضیح بیشتر با هوش مصنوعی</b> <span class="tag v2">v2</span>: «چرا گزینهٔ من غلط بود؟» — فیچر اشتراکی.</li>
+    <li><b>پنل معلم/آموزشگاه</b> <span class="tag v2">v2</span>: ساخت کلاس، تخصیص تمرین، دیدن آمار شاگردان.</li>
+  </ul>
+</section>
+
+<section id="leitner">
+  <h2><span class="n">۰۵</span>حفظ لغات به روش لایتنر پنج‌خانه (G5)</h2>
+  <p class="sub">رابط کاربری آشنا برای کاربر ایرانی، موتور مرور فاصله‌دار مدرن در پشت صحنه.</p>
+  <p>کاربران ایرانی روش جعبهٔ لایتنر و G5 را می‌شناسند؛ پس همان مفهوم «پنج خانه» را نشان می‌دهیم. هر کارت لغت در خانهٔ ۱ شروع می‌کند؛ پاسخ درست ← یک خانه جلو، پاسخ غلط ← برگشت به خانهٔ ۱.</p>
+  <div class="boxes">
+    <div class="bx"><b>۱</b><span>هر روز</span></div>
+    <div class="bx"><b>۲</b><span>هر ۲ روز</span></div>
+    <div class="bx"><b>۳</b><span>هر ۴ روز</span></div>
+    <div class="bx"><b>۴</b><span>هر ۸ روز</span></div>
+    <div class="bx"><b>۵</b><span>هر ۱۶ روز</span></div>
+    <div class="bx done"><b>✓</b><span>آموخته‌شده</span></div>
+  </div>
+  <h3>جزئیات طراحی</h3>
+  <ul>
+    <li><b>منبع کارت‌ها:</b> لیست‌های آماده (۵۰۴ لغت، لغات کنکور، Academic Word List، لغات سطح‌بندی‌شده CEFR) + لغاتی که کاربر در ریدینگ لمس کرده + لغات سؤال‌های غلط.</li>
+    <li><b>شکل کارت:</b> روی کارت: لغت + تلفظ + جملهٔ مثال. پشت کارت: معنی فارسی، مترادف، هم‌خانواده. برای تنوع، گاهی کارت به‌صورت چهارگزینه‌ای پرسیده می‌شود (لغت ← معنی یا جای خالی جمله).</li>
+    <li><b>خودارزیابی:</b> «بلد بودم / بلد نبودم». در حالت چهارگزینه‌ای، نمره خودکار است.</li>
+    <li><b>سقف روزانه:</b> ۱۰ لغت جدید در روز پیش‌فرض (قابل تنظیم) تا صف مرور منفجر نشود.</li>
+    <li><b>یادآوری:</b> اعلان محلی ساعت دلخواه کاربر: «۱۸ کارت امروز منتظرند».</li>
+  </ul>
+  <div class="note brand">موتور زمان‌بندی را از روز اول جدا و قابل تعویض بنویسید. در MVP همان فواصل ثابت ۱-۲-۴-۸-۱۶ کافی است؛ در v2 می‌توان الگوریتم FSRS (الگوریتم Anki) را جایگزین کرد بی‌آنکه ظاهر پنج‌خانه تغییر کند.</div>
+</section>
+
+<section id="game">
+  <h2><span class="n">۰۶</span>گیمیفیکیشن و نگهداشت کاربر</h2>
+  <p class="sub">هدف: عادت روزانه، نه اعتیاد. هیچ مکانیکی نباید یادگیری را جریمه کند.</p>
+  <div class="grid">
+    <div class="card"><span class="tag mvp">MVP</span><h4>🔥 استریک</h4><p>هر روز حداقل یک درس. «یخ‌زدن استریک» یک روز در هفته رایگان؛ بیشتر با تماشای تبلیغ یا اشتراک.</p></div>
+    <div class="card"><span class="tag mvp">MVP</span><h4>⭐ XP و سطح</h4><p>پاسخ درست = ۱۰ XP، تکمیل درس = ۲۰ XP، مرور لایتنر = ۵ XP برای هر کارت.</p></div>
+    <div class="card"><span class="tag">v1.1</span><h4>🏆 لیگ هفتگی</h4><p>گروه‌های ۳۰ نفره بر اساس XP هفته؛ صعود و سقوط بین لیگ‌ها. محرک اصلی بازگشت.</p></div>
+    <div class="card"><span class="tag">v1.1</span><h4>🎖️ مدال‌ها</h4><p>«۱۰۰ سؤال گرامر بی‌غلط»، «۵۰۰ لغت آموخته‌شده»، «استریک ۳۰ روزه».</p></div>
+    <div class="card"><span class="tag v2">v2</span><h4>⚔️ دوئل</h4><p>مسابقهٔ ۱۰ سؤالی هم‌زمان با دوست یا حریف تصادفی هم‌سطح.</p></div>
+    <div class="card"><span class="tag v2">v2</span><h4>📤 کارت اشتراک‌گذاری</h4><p>تصویر زیبای کارنامه/استریک برای استوری اینستاگرام؛ موتور رشد ارگانیک.</p></div>
+  </div>
+  <div class="note"><b>عمداً حذف شده:</b> سیستم «جان/قلب» که با هر غلط کم می‌شود. در اپ تست‌زنی، غلط‌کردن بخشی از یادگیری است و نباید جریمه شود.</div>
+</section>
+
+<section id="content">
+  <h2><span class="n">۰۷</span>بانک سؤال و استراتژی محتوا</h2>
+  <p class="sub">محتوا قلب محصول است؛ کیفیت سؤال مهم‌تر از تعداد آن است.</p>
+  <h3>هدف حجم محتوا</h3>
+  <div class="tbl"><table>
+    <tr><th>بخش</th><th>عرضهٔ اول (MVP)</th><th>۶ ماه بعد</th></tr>
+    <tr><td>گرامر</td><td>۱٬۵۰۰ سؤال در ۴۰ مبحث</td><td>۴٬۰۰۰</td></tr>
+    <tr><td>لغت (چهارگزینه‌ای)</td><td>۱٬۵۰۰ سؤال</td><td>۵٬۰۰۰</td></tr>
+    <tr><td>ریدینگ</td><td>۸۰ متن (حدود ۴۰۰ سؤال)</td><td>۳۰۰ متن</td></tr>
+    <tr><td>کارت‌های لایتنر</td><td>۲٬۰۰۰ لغت</td><td>۶٬۰۰۰ لغت</td></tr>
+  </table></div>
+  <h3>خط تولید محتوا</h3>
+  <ol>
+    <li><b>تولید پیش‌نویس:</b> مؤلف انسانی یا هوش مصنوعی با پرامپت استاندارد (سطح، مبحث، نوع سؤال، چهار گزینه با گزینه‌های انحرافی منطقی، توضیح فارسی).</li>
+    <li><b>بازبینی انسانی:</b> هر سؤال حداقل یک ویراستار مسلط تأیید می‌کند؛ هیچ سؤال تولیدشده با AI بدون بازبینی منتشر نمی‌شود.</li>
+    <li><b>انتشار در پنل ادمین:</b> وضعیت سؤال: پیش‌نویس ← در حال بازبینی ← منتشرشده ← بایگانی.</li>
+    <li><b>سنجش کیفیت پس از انتشار:</b> نرخ پاسخ درست، زمان پاسخ و گزارش‌های کاربران. سؤال‌های با «ضریب تمیز» پایین یا گزارش زیاد خودکار پرچم می‌خورند.</li>
+    <li><b>کالیبراسیون سختی:</b> سختی واقعی هر سؤال از داده‌های پاسخ کاربران محاسبه و جایگزین سختی حدسی مؤلف می‌شود.</li>
+  </ol>
+  <div class="note"><b>حق تکثیر:</b> سؤال‌ها را از کتاب‌های تست منتشرشده کپی نکنید. سؤال‌های کنکورهای سراسری گذشته معمولاً قابل استفاده‌اند، ولی متن‌های ریدینگ را خودتان بنویسید یا از منابع با مجوز آزاد (مثل ویکی‌پدیا با رعایت CC BY-SA) اقتباس کنید.</div>
+</section>
+
+<section id="money">
+  <h2><span class="n">۰۸</span>مدل درآمدی</h2>
+  <p class="sub">Freemium: اپ کاملاً قابل‌استفاده و رایگان، با سه جریان درآمدی مکمل.</p>
+  <div class="grid">
+    <div class="card"><h4>۱. تبلیغات (حجم بالا، درآمد کم)</h4>
+      <ul>
+        <li><b>تبلیغ جایزه‌دار (Rewarded):</b> تماشا ← یخ‌زدن استریک، دو برابر XP، باز کردن یک آزمون شبیه‌ساز.</li>
+        <li><b>تبلیغ میان‌صفحه‌ای:</b> فقط بعد از پایان درس، حداکثر هر ۳ درس یک بار. هرگز وسط سؤال.</li>
+        <li>شبکه‌ها: <b>تپسل/ادیوری</b> برای ایران، <b>AdMob</b> برای خارج.</li>
+      </ul></div>
+    <div class="card"><h4>۲. اشتراک «زبانز پلاس» (درآمد اصلی)</h4>
+      <ul>
+        <li>بدون تبلیغ</li>
+        <li>آمار پیشرفته و نقشهٔ ضعف کامل</li>
+        <li>آزمون‌های شبیه‌ساز نامحدود</li>
+        <li>بسته‌های آفلاین کامل</li>
+        <li>توضیح هوش مصنوعی برای هر سؤال</li>
+        <li>یخ‌زدن استریک نامحدود</li>
+      </ul></div>
+    <div class="card"><h4>۳. B2B و فروش موردی</h4>
+      <ul>
+        <li><b>پنل آموزشگاه:</b> اشتراک به ازای هر شاگرد؛ معلم تمرین تعیین می‌کند و آمار می‌بیند.</li>
+        <li><b>بستهٔ آزمون (خرید یک‌باره):</b> مثلاً «۲۰ آزمون کامل MSRT».</li>
+        <li><b>همکاری با آموزشگاه‌ها و ناشران</b> برای معرفی دوره‌ها (Affiliate).</li>
+      </ul></div>
+  </div>
+  <h3>قیمت‌گذاری پیشنهادی (قابل آزمایش)</h3>
+  <div class="tbl"><table>
+    <tr><th>طرح</th><th>ایران (تومان)</th><th>بین‌المللی</th><th>نکته</th></tr>
+    <tr><td>ماهانه</td><td>۱۴۹٬۰۰۰</td><td>$4.99</td><td>لنگر قیمتی</td></tr>
+    <tr><td>سالانه</td><td>۸۹۰٬۰۰۰</td><td>$29.99</td><td>طرح پیشنهادی اصلی (~۵۰٪ تخفیف)</td></tr>
+    <tr><td>فصل کنکور / آزمون</td><td>۳۹۰٬۰۰۰ برای ۳ ماه</td><td>—</td><td>کمپین قبل از آزمون‌ها</td></tr>
+  </table></div>
+  <p style="font-size:14px;color:var(--muted)">اعداد صرفاً نقطهٔ شروع‌اند و باید با تست A/B و مقایسه با رقبا در کافه‌بازار و مایکت تنظیم شوند.</p>
+  <h3>درگاه پرداخت — نکتهٔ حیاتی بازار ایران</h3>
+  <ul>
+    <li><b>اندروید در ایران:</b> پرداخت درون‌برنامه‌ای <b>کافه‌بازار</b> و <b>مایکت</b> (هر کدام یک بیلد جداگانه).</li>
+    <li><b>اندروید بین‌المللی:</b> Google Play Billing.</li>
+    <li><b>iOS:</b> کاربران ایرانی به App Store Payments دسترسی ندارند؛ برای آن‌ها پرداخت از طریق وب (زرین‌پال و مشابه) و فعال‌سازی اشتراک روی حساب کاربری. برای کاربران خارج از ایران، In-App Purchase اپل.</li>
+    <li><b>اشتراک روی سرور:</b> وضعیت اشتراک همیشه در بک‌اند نگه داشته شود، نه در اپ؛ تا یک اشتراک روی همهٔ دستگاه‌ها و پلتفرم‌ها کار کند.</li>
+  </ul>
+  <h3>قیف تبدیل</h3>
+  <p>پیشنهاد اشتراک فقط در لحظه‌های پرانگیزه نمایش داده شود: پایان آزمون تعیین سطح، بعد از کارنامهٔ هفتگی، قبل از آزمون شبیه‌ساز، و رسیدن به استریک ۷ روزه. یک دورهٔ آزمایشی رایگان ۷ روزه نرخ تبدیل را به‌طور معمول چند برابر می‌کند. هدف واقع‌بینانه: <b>۲ تا ۴ درصد</b> کاربران فعال ماهانه مشترک شوند.</p>
+</section>
+
+<section id="tech">
+  <h2><span class="n">۰۹</span>انتخاب فناوری</h2>
+  <p class="sub">پیشنهاد شما (React Native) درست است؛ با Expo و چند تصمیم مشخص برای شرایط ایران.</p>
+
+  <h3>چرا React Native + Expo (و نه Flutter یا Native)</h3>
+  <div class="tbl"><table>
+    <tr><th>معیار</th><th>React Native + Expo</th><th>Flutter</th><th>Native (Kotlin + Swift)</th></tr>
+    <tr><td>یک کد برای اندروید و iOS</td><td>✅</td><td>✅</td><td>❌ دو برابر کار</td></tr>
+    <tr><td>اشتراک کد با پنل ادمین/وب</td><td>✅ TypeScript در همه‌جا</td><td>⚠️ Dart</td><td>❌</td></tr>
+    <tr><td>بازار نیروی کار در ایران</td><td>✅ زیاد (JS/React)</td><td>متوسط</td><td>متوسط</td></tr>
+    <tr><td>کارایی برای اپ فرم و لیست</td><td>✅ کافی (معماری جدید)</td><td>✅</td><td>✅</td></tr>
+    <tr><td>بروزرسانی بدون استور (OTA)</td><td>✅ expo-updates</td><td>⚠️ محدود</td><td>❌</td></tr>
+  </table></div>
+  <p>این اپ عمدتاً متن، فرم و لیست است و انیمیشن سنگین ندارد؛ برتری عملکردی Flutter اینجا اهمیتی ندارد، ولی یک زبان مشترک (TypeScript) برای موبایل، بک‌اند و پنل ادمین سرعت تیم کوچک را بالا می‌برد.</p>
+
+  <h3>معماری کلی</h3>
+  <div class="arch">
+    <div class="layer"><h5>📱 اپ موبایل</h5><div>Expo + TypeScript<br>Expo Router<br>SQLite محلی (آفلاین)<br>TanStack Query + Zustand</div></div>
+    <div class="arrow">⇄</div>
+    <div class="layer"><h5>⚙️ بک‌اند API</h5><div>Node.js (NestJS یا Fastify)<br>PostgreSQL + Redis<br>احراز هویت OTP / Google<br>وب‌هوک‌های پرداخت</div></div>
+    <div class="arrow">⇄</div>
+    <div class="layer"><h5>🗂️ محتوا و ادمین</h5><div>پنل ادمین (Next.js یا Directus)<br>CDN برای بسته‌های سؤال<br>فایل‌های صوتی TTS</div></div>
+  </div>
+
+  <h3>پشتهٔ پیشنهادی</h3>
+  <div class="tbl"><table>
+    <tr><th>لایه</th><th>انتخاب</th><th>دلیل</th></tr>
+    <tr><td>موبایل</td><td><code>Expo SDK</code> + <code>TypeScript</code> + <code>Expo Router</code></td><td>ساخت سریع، ناوبری مبتنی بر فایل، بیلد هر دو پلتفرم</td></tr>
+    <tr><td>ذخیرهٔ محلی</td><td><code>expo-sqlite</code> + <code>Drizzle ORM</code>، و <code>MMKV</code> برای تنظیمات</td><td>آفلاین‌محور؛ کوئری روی هزاران سؤال و کارت</td></tr>
+    <tr><td>وضعیت و شبکه</td><td><code>TanStack Query</code> + <code>Zustand</code></td><td>کش، تلاش مجدد، ساده و سبک</td></tr>
+    <tr><td>UI</td><td><code>Tamagui</code> یا <code>NativeWind</code> + فونت وزیرمتن</td><td>پشتیبانی RTL و تم تاریک</td></tr>
+    <tr><td>بک‌اند</td><td><code>NestJS</code> + <code>PostgreSQL</code> + <code>Redis</code></td><td>ساختاریافته، مناسب رشد تیم؛ Redis برای لیگ‌ها و لیدربورد</td></tr>
+    <tr><td>میزبانی</td><td>لیارا / ابر آروان (ایران) + یک سرور خارج برای کاربران بین‌المللی</td><td>سرعت و پایداری داخل ایران، جلوگیری از مشکلات تحریم</td></tr>
+    <tr><td>پنل ادمین</td><td><code>Directus</code> روی همان Postgres (شروع) ← Next.js سفارشی (بعدها)</td><td>تیم محتوا از هفتهٔ اول کار کند بدون نوشتن پنل</td></tr>
+    <tr><td>پیامک OTP</td><td>کاوه‌نگار / ملی‌پیامک</td><td>ورود با شمارهٔ موبایل، روش رایج در ایران</td></tr>
+    <tr><td>آنالیتیکس و خطا</td><td><code>PostHog</code> و <code>Sentry</code> (هر دو قابل نصب روی سرور خودتان)</td><td>قیف، رفتار کاربر، کرش‌ها</td></tr>
+  </table></div>
+
+  <div class="note"><b>هشدار تحریم:</b> سرویس‌هایی مثل Firebase، Supabase، EAS Build/Update و Google Sign-In ممکن است برای کاربران یا توسعه‌دهندگان ایرانی مسدود یا ناپایدار باشند. هستهٔ اپ نباید به هیچ سرویسی وابسته باشد که از داخل ایران در دسترس نیست. بیلد را می‌توان به‌صورت محلی (<code>npx expo run:android</code>) یا در CI شخصی گرفت و سرور OTA را خودمیزبان کرد.</div>
+
+  <h3>همگام‌سازی آفلاین</h3>
+  <ul>
+    <li>سؤال‌ها در قالب <b>بسته‌های نسخه‌دار JSON</b> (مثلاً بر اساس مهارت و سطح) از CDN دانلود و در SQLite ذخیره می‌شوند؛ فقط تغییرات (diff) دوباره دانلود می‌شوند.</li>
+    <li>پاسخ‌ها، بوکمارک‌ها و کارت‌های لایتنر ابتدا محلی ذخیره و به‌صورت دسته‌ای با سرور همگام می‌شوند (outbox pattern).</li>
+    <li>حل تعارض: پاسخ‌ها فقط اضافه می‌شوند (append-only)؛ برای بوکمارک و کارت، «آخرین تغییر برنده است».</li>
+  </ul>
+</section>
+
+<section id="data">
+  <h2><span class="n">۱۰</span>مدل داده</h2>
+  <p class="sub">جداول اصلی؛ ساختار سؤال از ابتدا باید برچسب‌گذاری غنی داشته باشد.</p>
+<pre>// نمونهٔ یک سؤال در بستهٔ JSON
+{
+  "id": "gr_b1_cond2_0042",
+  "skill": "grammar",            // grammar | vocab | reading
+  "topic": "conditionals.second",
+  "cefr": "B1",
+  "difficulty": 0.55,            // 0..1، بعداً از دادهٔ واقعی کالیبره می‌شود
+  "exams": ["konkur", "msrt"],
+  "passage_id": null,            // برای ریدینگ پر می‌شود
+  "stem": "If I ____ more time, I would learn Japanese.",
+  "options": ["have", "will have", "had", "would have"],
+  "answer": 2,
+  "explanation_fa": "شرطی نوع دوم: if + گذشتهٔ ساده، would + فعل ساده.",
+  "version": 3
+}</pre>
+  <div class="tbl"><table>
+    <tr><th>جدول</th><th>فیلدهای کلیدی</th></tr>
+    <tr><td><code>users</code></td><td>id, phone/email, level_cefr, target_exam, xp, streak, plan, plan_expires_at</td></tr>
+    <tr><td><code>questions</code></td><td>مثل نمونهٔ بالا + status, author_id, reviewed_by</td></tr>
+    <tr><td><code>passages</code></td><td>id, title, body, cefr, word_count</td></tr>
+    <tr><td><code>attempts</code></td><td>user_id, question_id, chosen, correct, time_ms, session_id, created_at</td></tr>
+    <tr><td><code>bookmarks</code></td><td>user_id, question_id, note, created_at</td></tr>
+    <tr><td><code>words</code></td><td>id, lemma, pos, ipa, meaning_fa, example, audio_url, lists[]</td></tr>
+    <tr><td><code>srs_cards</code></td><td>user_id, item_type (word/question), item_id, box (1..5), due_at, lapses</td></tr>
+    <tr><td><code>reports</code></td><td>user_id, question_id, reason, text, status</td></tr>
+  </table></div>
+</section>
+
+<section id="screens">
+  <h2><span class="n">۱۱</span>صفحات اصلی و جریان کاربر</h2>
+  <p class="sub">ناوبری پایینی با چهار تب؛ همه‌چیز در حداکثر دو لمس.</p>
+  <div class="grid">
+    <div class="card"><h4>🏠 خانه</h4><p>دکمهٔ بزرگ «درس امروز»، تعداد کارت‌های لایتنر امروز، استریک، میان‌بر «مرور اشتباهات».</p></div>
+    <div class="card"><h4>📚 تمرین</h4><p>انتخاب مهارت ← مبحث ← سطح؛ آزمون‌های شبیه‌ساز؛ بوکمارک‌ها و دفتر اشتباهات.</p></div>
+    <div class="card"><h4>🗃️ لغات</h4><p>جعبهٔ لایتنر پنج‌خانه، لیست‌های لغت، جستجو و افزودن لغت دلخواه.</p></div>
+    <div class="card"><h4>📊 من</h4><p>آمار، لیگ، مدال‌ها، اشتراک، تنظیمات (یادآور، تم، هدف روزانه).</p></div>
+  </div>
+  <h3>اولین تجربه (Onboarding) — زیر ۶۰ ثانیه تا اولین سؤال</h3>
+  <ol>
+    <li>«برای چه زبان می‌خوانی؟» (کنکور / MSRT-EPT / آیلتس-تافل / عمومی)</li>
+    <li>«روزی چقدر وقت داری؟» (۵ / ۱۰ / ۲۰ دقیقه)</li>
+    <li>آزمون تعیین سطح یا «از مبتدی شروع کن»</li>
+    <li>نتیجه و اولین درس — <b>ثبت‌نام بعد از اولین درس</b> پیشنهاد می‌شود، نه قبل از آن.</li>
+  </ol>
+  <h3>اصول UX</h3>
+  <ul>
+    <li>متن سؤال انگلیسی چپ‌چین (LTR)، رابط کاربری راست‌چین (RTL)؛ هر دو باید دقیق تست شوند.</li>
+    <li>بازخورد فوری با رنگ <b>و</b> آیکون (برای کاربران کوررنگ)؛ لرزش ملایم (haptic).</li>
+    <li>اندازهٔ فونت قابل تنظیم، اهداف لمسی حداقل ۴۸ پیکسل، تم تاریک.</li>
+  </ul>
+</section>
+
+<section id="kpi">
+  <h2><span class="n">۱۲</span>معیارهای موفقیت (KPI)</h2>
+  <p class="sub">از روز اول همهٔ رویدادها را ثبت کنید؛ تصمیم‌ها بر اساس داده.</p>
+  <div class="tbl"><table>
+    <tr><th>معیار</th><th>هدف ۳ ماه اول</th><th>چرا مهم است</th></tr>
+    <tr><td>نگهداشت روز ۱ / ۷ / ۳۰</td><td>۴۰٪ / ۲۰٪ / ۱۰٪</td><td>مهم‌ترین نشانهٔ تناسب محصول با بازار</td></tr>
+    <tr><td>سؤال پاسخ‌داده‌شده به ازای هر کاربر فعال روزانه</td><td>۲۵+</td><td>عمق تعامل</td></tr>
+    <tr><td>درصد کاربران با استریک ۷ روزه</td><td>۱۵٪</td><td>شکل‌گیری عادت</td></tr>
+    <tr><td>نرخ تبدیل به اشتراک</td><td>۲ تا ۴ درصد MAU</td><td>پایداری مالی</td></tr>
+    <tr><td>نرخ گزارش خطا به ازای هر ۱۰۰۰ پاسخ</td><td>زیر ۰٫۵</td><td>کیفیت بانک سؤال</td></tr>
+    <tr><td>امتیاز استور</td><td>۴٫۵+</td><td>جذب ارگانیک در کافه‌بازار</td></tr>
+  </table></div>
+</section>
+
+<section id="roadmap">
+  <h2><span class="n">۱۳</span>نقشهٔ راه</h2>
+  <p class="sub">برای تیم ۲ تا ۳ نفره (یک برنامه‌نویس فول‌استک، یک مسئول محتوا، طراح پاره‌وقت).</p>
+  <div class="road">
+    <div class="step"><small>هفتهٔ ۱ تا ۲</small><h4>پایه‌ها</h4><p>طراحی UI در Figma، راه‌اندازی مخزن، Expo، بک‌اند، Postgres و Directus. تیم محتوا تولید سؤال را هم‌زمان شروع می‌کند.</p></div>
+    <div class="step"><small>هفتهٔ ۳ تا ۶</small><h4>هستهٔ تمرین</h4><p>صفحهٔ سؤال، درس روزانه، تمرین آزاد، ریدینگ، بوکمارک، دفتر اشتباهات، ذخیرهٔ آفلاین و همگام‌سازی.</p></div>
+    <div class="step"><small>هفتهٔ ۷ تا ۹</small><h4>لایتنر، آمار و ورود</h4><p>جعبهٔ پنج‌خانه، اعلان‌ها، آمار پایه، XP و استریک، ورود با OTP، آزمون تعیین سطح.</p></div>
+    <div class="step"><small>هفتهٔ ۱۰ تا ۱۲</small><h4>بتای بسته و عرضهٔ MVP</h4><p>۱۰۰ تا ۲۰۰ تستر از آموزشگاه‌ها و کانال‌های تلگرامی، رفع اشکال، عرضه در کافه‌بازار و مایکت.</p></div>
+    <div class="step"><small>ماه ۴ تا ۶ — v1.1</small><h4>درآمدزایی و رشد</h4><p>اشتراک پلاس، تبلیغات، لیگ هفتگی، آزمون زمان‌دار، نقشهٔ ضعف، تلفظ لغات. انتشار در Google Play.</p></div>
+    <div class="step"><small>ماه ۷ به بعد — v2</small><h4>گسترش</h4><p>نسخهٔ iOS، شبیه‌سازهای آزمون رسمی، توضیح AI، دوئل، پنل آموزشگاه، الگوریتم FSRS.</p></div>
+  </div>
+</section>
+
+<section id="risks">
+  <h2><span class="n">۱۴</span>ریسک‌ها و راهکارها</h2>
+  <div class="tbl"><table>
+    <tr><th>ریسک</th><th>اثر</th><th>راهکار</th></tr>
+    <tr><td>کیفیت پایین یا غلط بودن سؤال‌ها</td><td>بالا</td><td>بازبینی انسانی اجباری، دکمهٔ گزارش، پایش آماری سؤال‌ها</td></tr>
+    <tr><td>هزینه و زمان تولید محتوا</td><td>بالا</td><td>تولید با کمک AI + ویراستار، اولویت به مباحث پرتکرار آزمون‌ها</td></tr>
+    <tr><td>تحریم و قطعی سرویس‌های خارجی</td><td>بالا</td><td>میزبانی داخلی، سرویس‌های خودمیزبان، بیلد محلی</td></tr>
+    <tr><td>محدودیت پرداخت iOS برای کاربران ایرانی</td><td>متوسط</td><td>پرداخت وب + اشتراک مبتنی بر حساب کاربری</td></tr>
+    <tr><td>رقابت با اپ‌های موجود</td><td>متوسط</td><td>تمرکز روی تست‌زنی هدفمند و آزمون‌های ایرانی، نه آموزش عمومی</td></tr>
+    <tr><td>کپی‌شدن بانک سؤال</td><td>متوسط</td><td>رمزنگاری سادهٔ بسته‌های آفلاین، دانلود تدریجی، شناسه‌گذاری محتوا</td></tr>
+    <tr><td>ریزش کاربر بعد از هفتهٔ اول</td><td>بالا</td><td>استریک، اعلان هوشمند، لیگ، درس کوتاه</td></tr>
+  </table></div>
+</section>
+
+<section id="next">
+  <h2><span class="n">۱۵</span>قدم‌های بعدی</h2>
+  <ol>
+    <li><b>تأیید این سند</b> و نهایی‌کردن نام و هویت بصری.</li>
+    <li><b>تولید ۲۰۰ سؤال نمونه</b> با ساختار داده بالا برای تست قالب و پنل ادمین.</li>
+    <li><b>طراحی وایرفریم</b> چهار صفحهٔ اصلی + صفحهٔ سؤال + جعبهٔ لایتنر.</li>
+    <li><b>راه‌اندازی پروژه:</b> مخزن مونوریپو (اپ، بک‌اند، انواع مشترک TypeScript).</li>
+    <li><b>ساخت اولین نسخهٔ قابل‌لمس:</b> صفحهٔ سؤال آفلاین با ۲۰۰ سؤال نمونه، قبل از هر چیز دیگر.</li>
+  </ol>
+  <div class="note brand">این سند مبنای پیاده‌سازی است و با هر تصمیم مهم بروزرسانی می‌شود.</div>
+</section>
+
+</main>
+</div>
+
+<footer>زبانز · سند طراحی محصول · نسخه ۱.۰ · آبان ۱۴۰۵</footer>
+
+<button class="theme-btn" onclick="var r=document.documentElement,d=r.dataset.theme==='dark'||(!r.dataset.theme&&matchMedia('(prefers-color-scheme: dark)').matches);r.dataset.theme=d?'light':'dark'">◐ تغییر تم</button>
+</body>
+</html>

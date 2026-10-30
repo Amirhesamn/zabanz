@@ -1,0 +1,10 @@
+packages:
+  - 'apps/*'
+  - 'packages/*'
+  - 'content'
+
+onlyBuiltDependencies:
+  - esbuild
+
+# RN ad/billing SDKs (Tapsell, Bazaar) are not tested with isolated installs
+nodeLinker: hoisted

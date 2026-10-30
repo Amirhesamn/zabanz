@@ -1,0 +1,43 @@
+{
+  "expo": {
+    "name": "زبانز",
+    "slug": "zabanz",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "scheme": "zabanz",
+    "userInterfaceStyle": "automatic",
+    "ios": {
+      "bundleIdentifier": "ir.zabanz.app",
+      "icon": "./assets/expo.icon"
+    },
+    "android": {
+      "package": "ir.zabanz.app",
+      "adaptiveIcon": {
+        "backgroundColor": "#0f766e",
+        "foregroundImage": "./assets/images/android-icon-foreground.png",
+        "backgroundImage": "./assets/images/android-icon-background.png",
+        "monochromeImage": "./assets/images/android-icon-monochrome.png"
+      },
+      "predictiveBackGestureEnabled": false
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#0f766e",
+          "image": "./assets/images/splash-icon.png",
+          "imageWidth": 76
+        }
+      ],
+      "expo-sqlite",
+      ["expo-localization", { "forcesRTL": true }],
+      ["expo-font", { "fonts": ["./assets/fonts/Vazirmatn-Variable.ttf"] }]
+    ],
+    "experiments": {
+      "typedRoutes": true,
+      "reactCompiler": true
+    }
+  }
+}
